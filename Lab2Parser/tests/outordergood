@@ -1,0 +1,9 @@
+Success!
+Schemes(1):
+  scheme(X)
+Facts(0):
+Rules(0):
+Queries(1):
+  query('X')
+Domain(1):
+  'X'

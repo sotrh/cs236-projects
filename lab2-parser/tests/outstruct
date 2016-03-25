@@ -1,0 +1,12 @@
+Success!
+Schemes(2):
+  scheme(P)
+  scheme(X,Y)
+Facts(0):
+Rules(0):
+Queries(2):
+  query('P')?
+  query('X',Y)?
+Domain(2):
+  'P'
+  'X'

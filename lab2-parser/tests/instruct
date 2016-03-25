@@ -1,0 +1,8 @@
+Schemes:
+	scheme(P)
+	scheme(X,Y)
+Facts:
+Rules:
+Queries:
+	query('P')?
+	query('X',Y)?

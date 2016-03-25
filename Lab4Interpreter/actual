@@ -1,0 +1,49 @@
+Scheme Evaluation
+
+Fact Evaluation
+
+bitx
+
+bity
+
+combo
+
+nibble
+  x='0' y='1'
+
+yx
+
+Rule Evaluation
+
+bitx(x) :- nibble(x,y)
+  x='0'
+bity(y) :- nibble(x,y)
+  y='1'
+yx(y,x) :- nibble(x,y)
+  y='1' x='0'
+combo(x,y) :- nibble(x,a),yx(x,b)
+bitx(x) :- nibble(x,y)
+bity(y) :- nibble(x,y)
+yx(y,x) :- nibble(x,y)
+combo(x,y) :- nibble(x,a),yx(x,b)
+
+Converged after 2 passes through the Rules.
+
+bitx
+  x='0'
+
+bity
+  y='1'
+
+combo
+
+nibble
+  x='0' y='1'
+
+yx
+  y='1' x='0'
+
+Query Evaluation
+
+combo(x,y)? No
+

@@ -1,0 +1,18 @@
+Schemes:
+	nibble(x,y)
+	bitx(x)
+	bity(y)
+	yx(y,x)
+	combo(x,y)
+
+Facts:
+	nibble('0','1').
+
+Rules:
+	bitx(x) :- nibble(x,y).
+	bity(y) :- nibble(x,y).
+	yx(y,x) :- nibble(x,y).
+	combo(x,y) :- nibble(x,a), yx(x,b).
+
+Queries:
+	combo(x,y)?

@@ -1,0 +1,6 @@
+Schemes:
+	scheme(X)
+Facts:
+Rules:
+Queries:
+	query('X')?
