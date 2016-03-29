@@ -1,18 +1,14 @@
 Schemes:
-	nibble(x,y)
-	bitx(x)
-	bity(y)
-	yx(y,x)
-	combo(x,y)
+	r(a,b)
+	x(a)
 
 Facts:
-	nibble('0','1').
+	r('0','1').
 
 Rules:
-	bitx(x) :- nibble(x,y).
-	bity(y) :- nibble(x,y).
-	yx(y,x) :- nibble(x,y).
-	combo(x,y) :- nibble(x,a), yx(x,b).
+	x(a)   :- r(a,b).
+	r(a,b) :- r(b,a).
+	r(a,b) :- x(a),x(b).
 
 Queries:
-	combo(x,y)?
+	r(x,y)?

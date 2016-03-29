@@ -38,7 +38,7 @@ class Relation
     set<Tuple> tuples;
     vector<string> scheme;
     
-    void makeScheme(vector<string>&,vector<string>&,vector<pair<uint,uint>>&) const;
+    vector<string> makeScheme(vector<string>&,vector<pair<uint,uint>>&) const;
     bool canJoin(Tuple&,Tuple&,vector<pair<uint,uint>>&) const;
     Tuple joinTuples(Tuple&,Tuple&,vector<pair<uint,uint>>&) const;
     

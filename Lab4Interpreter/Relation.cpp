@@ -37,24 +37,24 @@ Relation Relation::select(unsigned pos, unsigned pos1) const
 Relation Relation::project(vector<unsigned>& positions) const
 {
     if (positions.size() == 0) return Relation(name, scheme);
-    
+
     vector<string> scheme;
-    for (uint i=0; i<positions.size(); i++) 
+    for (uint i = 0; i < positions.size(); i++)
     {
 	scheme.push_back(this->scheme[positions[i]]);
     }
-    
+
     Relation r(name, scheme);
     for (Tuple t : tuples)
     {
 	Tuple temp;
-	for (unsigned u : positions) 
+	for (unsigned u : positions)
 	{
 	    temp.insert(t[u]);
 	}
 	r.insert(temp);
     }
-    
+
     return r;
 }
 
@@ -71,10 +71,10 @@ string Relation::toString() const
     for (Tuple t : tuples)
     {
 	ss << "  ";
-	for (uint i=0; i<scheme.size(); i++)
+	for (uint i = 0; i < scheme.size(); i++)
 	{
 	    ss << scheme[i] << "=" << t[i];
-	    if (i<scheme.size() - 1) ss << " ";
+	    if (i < scheme.size() - 1) ss << " ";
 	}
 	ss << endl;
     }
@@ -88,12 +88,12 @@ string Relation::toString() const
 Relation Relation::join(Relation& other, const string& name) const
 {
     vector<string> newScheme;
-    vector<pair<uint,uint>> joinColumns;
-    
-    makeScheme(other.scheme, newScheme, joinColumns);
-    
+    vector<pair<uint, uint>> joinColumns;
+
+    newScheme = makeScheme(other.scheme, joinColumns);
+
     Relation r(name, newScheme);
-    
+
     for (auto a : tuples)
     {
 	for (auto b : other.tuples)
@@ -105,29 +105,29 @@ Relation Relation::join(Relation& other, const string& name) const
 	    }
 	}
     }
-    
+
     return r;
 }
 
-void Relation::makeScheme(
-    vector<string>& otherScheme, 
-    vector<string>& newScheme, 
-    vector<pair<uint,uint>>& joinColumns) const
+vector<string> Relation::makeScheme(
+	vector<string>& otherScheme,
+	vector<pair<uint, uint>>&joinColumns) const
 {
-    newScheme = scheme;
-    for (uint i=0; i<otherScheme.size(); i++)
+    vector<string> newScheme = scheme;
+    for (uint i = 0; i < otherScheme.size(); i++)
     {
 	auto it = std::find(newScheme.begin(), newScheme.end(), otherScheme[i]);
 	if (it == newScheme.end()) newScheme.push_back(otherScheme[i]);
 	else
 	{
 	    auto index = std::distance(newScheme.begin(), it);
-	    joinColumns.push_back(pair<uint,uint>(index, i));
+	    joinColumns.push_back(pair<uint, uint>(index, i));
 	}
     }
+    return newScheme;
 }
 
-bool Relation::canJoin(Tuple& a, Tuple& b, vector<pair<uint,uint>>& joinColumns) const
+bool Relation::canJoin(Tuple& a, Tuple& b, vector<pair<uint, uint>>&joinColumns) const
 {
     for (auto p : joinColumns)
     {
@@ -136,16 +136,16 @@ bool Relation::canJoin(Tuple& a, Tuple& b, vector<pair<uint,uint>>& joinColumns)
     return true;
 }
 
-Tuple Relation::joinTuples(Tuple& a, Tuple& b, vector<pair<uint,uint>>& joinColumns) const
+Tuple Relation::joinTuples(Tuple& a, Tuple& b, vector<pair<uint, uint>>&joinColumns) const
 {
     Tuple t = a;
     bool shouldAdd = false;
-    for (uint i=0; i<b.size(); i++)
+    for (uint i = 0; i < b.size(); i++)
     {
 	shouldAdd = joinColumns.size() == 0;
 	for (auto p : joinColumns)
 	{
-	    if (p.second != i) 
+	    if (p.second != i)
 	    {
 		shouldAdd = true;
 		break;
