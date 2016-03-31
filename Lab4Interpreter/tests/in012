@@ -1,0 +1,15 @@
+Schemes:
+	r(a,b,c)
+	a(a)
+	bc(b,c)
+
+Facts:
+	r('0','1','2').
+
+Rules:
+	a(a)     :- r(a,b,c).
+	bc(b,c)  :- r(a,b,c).
+	r(a,b,c) :- bc(a,b),a(c).
+
+Queries:
+	r(a,b,c)?
