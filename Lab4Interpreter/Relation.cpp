@@ -139,15 +139,15 @@ bool Relation::canJoin(Tuple& a, Tuple& b, vector<pair<uint, uint>>&joinColumns)
 Tuple Relation::joinTuples(Tuple& a, Tuple& b, vector<pair<uint, uint>>&joinColumns) const
 {
     Tuple t = a;
-    bool shouldAdd = false;
+    bool shouldAdd = true;
     for (uint i = 0; i < b.size(); i++)
     {
-	shouldAdd = joinColumns.size() == 0;
+	shouldAdd = true;
 	for (auto p : joinColumns)
 	{
-	    if (p.second != i)
+	    if (p.second == i)
 	    {
-		shouldAdd = true;
+		shouldAdd = false;
 		break;
 	    }
 	}
